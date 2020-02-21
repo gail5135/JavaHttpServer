@@ -3,6 +3,7 @@ package realServer;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.format.DateTimeFormatter;
 
 public class MyServer {
     // Field
@@ -19,13 +20,13 @@ public class MyServer {
 
         while(true){
             try {
-                Socket s = serverSocket.accept();
 
+                Socket s = serverSocket.accept();
                 requestParser = new RequestParser(s.getInputStream());
                 request = requestParser.getRequest();
                 response = new RequestHandler().handleRequest(request);
-
                 response.sendResponse(s.getOutputStream());
+                s.close();
 
             } catch (IOException e){
                 e.printStackTrace();

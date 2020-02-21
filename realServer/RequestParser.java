@@ -27,16 +27,17 @@ public class RequestParser {
     public RequestParser(InputStream in) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
 
+
         // requestLine
         requestLine = bufferedReader.readLine();
         header = new StringBuffer();
 
         // header
-        String line;
-        while((line = bufferedReader.readLine()) != null){
+        String line = bufferedReader.readLine();
+        while(!line.isEmpty()){
             header.append(line+"\r\n");
+            line = bufferedReader.readLine();
         }
-
 
         // For debugging
         System.out.println(requestLine);

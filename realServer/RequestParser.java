@@ -20,13 +20,12 @@ public class RequestParser {
     private String targetPath;
     private String httpVersion;
     private StringBuffer header;
-    private Object body = null;
-    private HashMap<String, String> parameters;
+    private StringBuffer body = null;
+    private HashMap<String, String> parameters = null;
 
 
     public RequestParser(InputStream in) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-
 
         // requestLine
         requestLine = bufferedReader.readLine();
@@ -39,9 +38,24 @@ public class RequestParser {
             line = bufferedReader.readLine();
         }
 
+        // body (if body exists)
+//        line = bufferedReader.readLine();
+        System.out.println(line+"lineTest");
+//        if(line != null){
+//            body = new StringBuffer();
+//            body.append(line+"\r\n");
+//            line = bufferedReader.readLine();
+//
+//            while(line != null){
+//                body.append(line+"\r\n");
+//                line = bufferedReader.readLine();
+//            }
+//        }
+
         // For debugging
         System.out.println(requestLine);
         System.out.println(header);
+        System.out.println(body);
 
         // method | targetPath | httpVersion
         if(requestLine != null) {
@@ -66,8 +80,6 @@ public class RequestParser {
             parameterLine = targetPath.substring(targetPath.indexOf("?")+1);
             targetPath = targetPath.substring(1,targetPath.indexOf("?"));
 
-//            System.out.println(targetPath);
-//            System.out.println(parameterLine);
             this.parseGetParameters(parameterLine);
         }
     }
@@ -91,11 +103,19 @@ public class RequestParser {
     }
 
     public Request getRequest(){
-        return new Request(method, targetPath, httpVersion);
+        if(method.equals("GET")){
+            if(parameters == null) {
+                return new Request(method, targetPath, httpVersion);
+            }
+            else {
+                return new Request(method, targetPath, httpVersion, parameters);
+            }
+        }
+        else if(method.equals("POST") && body != null){
+            return new Request(method, targetPath, httpVersion, body);
+        }
+        else {
+            return new Request(method, targetPath, httpVersion);
+        }
     }
-
-    public Request getRequestWithBody(){
-        return new Request(method, targetPath, httpVersion, body);
-    }
-
 }

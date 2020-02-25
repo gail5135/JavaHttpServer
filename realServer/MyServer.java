@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class MyServer {
     // Field
-    public static final String RESPONSE_RESOURCE = MyServer.class.getClassLoader().getResource("").getPath()+ "/public/";
+    public static final String RESPONSE_RESOURCE = MyServer.class.getClassLoader().getResource("").getPath()+ "realServer/";
     public Request request;
     public RequestParser requestParser;
     public Response response;
@@ -16,7 +16,7 @@ public class MyServer {
     public MyServer(int portNum) throws IOException{
         ServerSocket serverSocket = new ServerSocket(portNum);
 
-        System.out.println("HTTP realServer.Server Start! Listening at " + portNum + "!");
+        System.out.println("HTTP realServer.Server Start! Listening at " + portNum + "!\r\n");
 
         while(true){
             try {

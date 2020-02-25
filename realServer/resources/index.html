@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form action="http://127.0.0.1:8090/" method="GET">
+    <fieldset>
+        <legend><strong>GET</strong></legend>
+        <label for="get_first">File name:</label>
+        <input type="text" id="get_first" name="text_get"><br><br>
+
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+
+<form action="http://127.0.0.1:8090/" method="POST">
+    <fieldset>
+        <legend><strong>POST</strong></legend>
+        <label for="first_value">First Value:</label>
+        <input type="text" id="first_value" name="text_post"><br><br>
+        <label for="second_value">Second Value:</label>
+        <input type="text" id="second_value" name="text_post"><br><br>
+        <label for="third_value">Third Value:</label>
+        <input type="text" id="third_value" name="text_post"><br><br>
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+</body>
+</html>

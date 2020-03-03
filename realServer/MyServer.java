@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 
 public class MyServer {
     // Field
-    public static final String RESPONSE_RESOURCE = MyServer.class.getClassLoader().getResource("").getPath()+ "realServer/";
     public Request request;
     public RequestParser requestParser;
     public Response response;

@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class RequestParser {
 
-    private Pattern requestLinePattern = Pattern.compile("(?<method>.*) (?<path>.*?) (?<version>.*)");
+//    private Pattern requestLinePattern = Pattern.compile("(?<method>.*) (?<path>.*?) (?<version>.*)");
     private String requestLine;
     private String method;
     private String targetPath;
@@ -33,14 +33,13 @@ public class RequestParser {
 
         // header
         String line = bufferedReader.readLine();
-        while(!line.isEmpty()){
+        while(line != null && !line.isEmpty()){
             header.append(line+"\r\n");
             line = bufferedReader.readLine();
         }
 
         // body (if body exists)
 //        line = bufferedReader.readLine();
-        System.out.println(line+"lineTest");
 //        if(line != null){
 //            body = new StringBuffer();
 //            body.append(line+"\r\n");
@@ -64,6 +63,7 @@ public class RequestParser {
             targetPath  = tempStr[1];
             httpVersion = tempStr[2];
         }
+
 
         // if method is 'get' and targetPath has 'parameters'
         if(method.equals("GET")){

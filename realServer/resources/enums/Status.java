@@ -1,7 +1,7 @@
 package realServer.resources.enums;
 
 public enum Status {
-    OK("200, OK"),
+    OK("200 OK"),
     BAD_REQUEST("400 BadRequest"),
     FORBIDDEN("403 Forbidden"),
     NOT_FOUND("404 NotFound"),

@@ -2,6 +2,7 @@ package realServer;
 
 import realServer.resources.enums.Status;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.OffsetDateTime;
@@ -36,9 +37,13 @@ public class Response{
             "Connection: Close" + CRLF
             + CRLF;
 
-        out.write(response.getBytes("UTF-8"));
-        out.write(body);
+        byte[] responseByteArray = response.getBytes("UTF-8");
 
-        out.flush();
+        byte[] temp = new byte[response.getBytes().length + body.length];
+        System.arraycopy(responseByteArray, 0, temp, 0, responseByteArray.length);
+        System.arraycopy(body, 0, temp, responseByteArray.length, body.length);
+
+        out.write(temp);
+//        out.flush();
     }
 }
